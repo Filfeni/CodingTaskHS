@@ -8,6 +8,8 @@ import { EntrycardComponent } from './components/entrycard/entrycard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { NewentryComponent } from './components/newentry/newentry.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,12 +18,13 @@ import { FooterComponent } from './components/footer/footer.component';
     EntrycardComponent,
     HeaderComponent,
     FooterComponent,
-    
+    NewentryComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
