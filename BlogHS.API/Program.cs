@@ -1,7 +1,11 @@
 using BlogHS.API.Extensions;
+using BlogHS.API.Validators;
+using BlogHS.Domain.Models.Entry;
 using BlogHS.Infrastructure.Data;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +30,8 @@ builder.Services.AddFluentValidation(conf =>
     conf.RegisterValidatorsFromAssembly(typeof(Program).Assembly);
     conf.AutomaticValidationEnabled = false;
 });
+builder.Services.AddScoped<IValidator<EntryDTO>, EntryDTOValidator>();
+builder.Services.AddScoped<IValidator<BaseEntryDTO>, BaseEntryDTOValidator>();
 
 var app = builder.Build();
 

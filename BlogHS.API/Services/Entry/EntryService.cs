@@ -24,7 +24,7 @@ namespace BlogHS.API.Services.Entry
         public async Task<List<EntryDTO>> GetAllAsync()
         {
             var repository = UnitOfWork.AsyncRepository<EntryEntity>();
-            var result = await repository.ListAsync(x => Equals(x));
+            var result = await repository.ListAsync(x => true);
 
             return result.Select(x => _mapper.Map<EntryDTO>(x)).ToList();
         }
