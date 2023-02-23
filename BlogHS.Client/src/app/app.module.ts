@@ -10,6 +10,10 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NewentryComponent } from './components/newentry/newentry.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { ApiService } from './services/api.service';
+import { ImageService } from './services/image.service';
+import { EntrydetailsComponent } from './components/entrydetails/entrydetails.component';
 
 @NgModule({
   declarations: [
@@ -19,14 +23,16 @@ import { ReactiveFormsModule } from '@angular/forms';
     HeaderComponent,
     FooterComponent,
     NewentryComponent,
+    EntrydetailsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ ApiService, ImageService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

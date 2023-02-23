@@ -43,7 +43,7 @@ namespace BlogHS.API.Services.Entry
             {
                 var repository = UnitOfWork.AsyncRepository<EntryEntity>();
                 var current = await repository.GetAsync(x => x.Id == dto.Id);
-                current.Update(dto.Title, dto.Content, dto.Thumbnail, dto.CreationDate, dto.ModificationDate);
+                current.Update(dto.Title, dto.Content, dto.ThumbnailUrl, dto.ThumbnailContent, dto.CreationDate, DateTimeOffset.Now);
                 var newEntity = await repository.UpdateAsync(current);
 
                 return true;

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogHS.Infrastructure.Migrations
 {
     [DbContext(typeof(EFContext))]
-    [Migration("20230220054716_InitialMigration")]
+    [Migration("20230222232403_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -44,7 +44,11 @@ namespace BlogHS.Infrastructure.Migrations
                     b.Property<DateTimeOffset?>("ModificationDate")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<string>("Thumbnail")
+                    b.Property<string>("ThumbnailContent")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ThumbnailUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

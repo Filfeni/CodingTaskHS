@@ -1,14 +1,8 @@
-export default class Entry {
-    constructor() {
-        this.id = 0;
-        this.title = '';
-        this.content = '';
-        this.thumbnailUrl = '';
-        this.creationDate = '';
-    }
+export default interface Entry {
     id?: number;
     title: string;
     content: string;
     thumbnailUrl: string;
+    thumbnailContent: string;
     creationDate: string;
 }

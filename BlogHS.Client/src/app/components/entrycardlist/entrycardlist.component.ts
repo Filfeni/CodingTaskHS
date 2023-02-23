@@ -1,41 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import Entry from 'src/app/models/Entry';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-entrycardlist',
   templateUrl: './entrycardlist.component.html',
   styleUrls: ['./entrycardlist.component.css']
 })
-export class EntrycardlistComponent {
-  entries : Entry[];
-  constructor(){
-    this.entries = [{
-      title: "What happened today at the park!",
-      content: "Today I went to the park with my dog Ben and we met more dogs whose he played with until the afternoon.",
-      thumbnailUrl:"https://www.aacounty.org/sebin/n/m/dogpark.jpg",
-      creationDate: "2013-06-23"
-    },{
-      title: "What happened today at the park!",
-      content: "Today I went to the park with my dog Ben and we met more dogs whose he played with until the afternoon.",
-      thumbnailUrl:"https://www.aacounty.org/sebin/n/m/dogpark.jpg",
-      creationDate: "2013-06-23"
-    },{
-      title: "What happened today at the park!",
-      content: "Today I went to the park with my dog Ben and we met more dogs whose he played with until the afternoon.",
-      thumbnailUrl:"https://www.aacounty.org/sebin/n/m/dogpark.jpg",
-      creationDate: "2013-06-23"
-    },{
-      title: "What happened today at the park!",
-      content: "Today I went to the park with my dog Ben and we met more dogs whose he played with until the afternoon.",
-      thumbnailUrl:"https://www.aacounty.org/sebin/n/m/dogpark.jpg",
-      creationDate: "2013-06-23"
-    },{
-      title: "What happened today at the park!",
-      content: "Today I went to the park with my dog Ben and we met more dogs whose he played with until the afternoon.",
-      thumbnailUrl:"https://www.aacounty.org/sebin/n/m/dogpark.jpg",
-      creationDate: "2013-06-23"
-    }] 
+export class EntrycardlistComponent implements OnInit {
+  entries : Entry[] = [];
+
+  public get entriesEmpty() : boolean {
+    return this.entries.length == 0;
+  }
+  
+  constructor(private apiService: ApiService){}
+
+  ngOnInit(): void {
+    this.apiService.getAll<Entry>('entry').subscribe((entries) => (this.entries = entries));
   }
 
-  onInit(): void {}
+  deleteEntry(id: number) {
+    this.apiService
+      .delete('entry',id)
+      .subscribe(
+        () => (this.entries = this.entries.filter((x) => x.id !== id))
+      );
+  }
 }

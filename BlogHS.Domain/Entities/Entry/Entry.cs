@@ -10,7 +10,9 @@ namespace BlogHS.Domain.Entities.Entry
         [Required]
         public string? Content { get; set; }
         [Required]
-        public string? Thumbnail { get; set; }
+        public string? ThumbnailUrl { get; set; }
+        [Required]
+        public string? ThumbnailContent { get; set; }
         [Required]
         public DateTimeOffset? CreationDate { get; set; }
         public DateTimeOffset? ModificationDate { get; set; }

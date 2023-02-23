@@ -63,7 +63,8 @@
               "browserTarget": "BlogHS.Client:build:production"
             },
             "development": {
-              "browserTarget": "BlogHS.Client:build:development"
+              "browserTarget": "BlogHS.Client:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

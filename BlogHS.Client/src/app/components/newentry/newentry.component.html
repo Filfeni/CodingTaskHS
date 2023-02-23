@@ -1,20 +1,38 @@
 <div class="mx-auto h-3/4 py-2 flex justify-center">
+    <div class="absolute top-20 left-10">
+        <div class="sticky">
+            <div (click)="goBack()" class="inline-flex cursor-pointer content-center mb-5">
+                <svg class="h-3 w-5 mr-1 self-center" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                <a class="font-bold">Go back</a>
+            </div>
+        </div>
+    </div>
     <div class="dark:bg-gray-900 rounded p-5 w-3/4">
-        <h1 class="dark:text-white text-2xl font-bold mb-4">
+        <h1 *ngIf="!hasId; else updateEntry" class="dark:text-white text-2xl font-bold mb-4">
             Create a new entry!
         </h1>
+        <ng-template #updateEntry>
+            <h1 class="dark:text-white text-2xl font-bold mb-4">
+                Update entry
+            </h1>
+        </ng-template>
         <form [formGroup]="newEntryForm" (ngSubmit)="onSubmit()">
             <div class="mb-6">
                 <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
                 <input formControlName="title" type="title" id="title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter title here" required>
             </div>
+            <div class="justify-center flex h-200px max-w-full">
+                <img class="border border-transparent rounded-lg" src="{{this.thumbnailContent}}">
+            </div>
             <div class="mb-6">
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload file</label>
-                <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file">
+                <input (change)="onFileSelected($event)" accept=".png,.jpeg,.jpg,.gif" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file">
             </div>
             <div class="mb-6">
                 <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Content</label>
-                <textarea formControlName="content" id="message" rows="4" class="block p-2.5 w-full md:h-[250px] text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Say something interesting..."></textarea>
+                <textarea formControlName="content" id="message" rows="4" class="block p-2.5 w-full md:h-[250px] text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required placeholder="Say something interesting..."></textarea>
             </div>
             <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button> 
         </form>

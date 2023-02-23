@@ -1,0 +1,15 @@
+<div class="grid border rounded-lg border-gray-700 place-content-center p-5 m-5">
+    <div (click)="goBack()" class="inline-flex cursor-pointer content-center mb-5">
+        <svg class="h-3 w-5 mr-1 self-center" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        <a class="font-bold">Go back</a>
+    </div>
+    <h1 class="text-5xl font-bold mb-2">{{entry.title}}</h1>
+    <p class=" text-gray-600 mb-4">Uploaded {{formatDate(entry.creationDate)}}</p>
+    <div class="inline-flex border rounded-lg border-8 justify-self-center h-200px max-w-full mb-5">
+        <img src="{{entry.thumbnailContent}}" alt="Thumbnail">
+    </div>
+    <p>{{entry.content}}</p>
+    
+</div>

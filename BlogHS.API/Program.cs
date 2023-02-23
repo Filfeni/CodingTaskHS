@@ -32,7 +32,13 @@ builder.Services.AddFluentValidation(conf =>
 });
 builder.Services.AddScoped<IValidator<EntryDTO>, EntryDTOValidator>();
 builder.Services.AddScoped<IValidator<BaseEntryDTO>, BaseEntryDTOValidator>();
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowOrigin",
+        builder => builder.WithOrigins("*")
+                          .AllowAnyHeader()
+                          .AllowAnyMethod());
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -41,6 +47,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("AllowOrigin");
 
 app.UseHttpsRedirection();
 
