@@ -24,6 +24,10 @@ export class EntrycardComponent implements OnInit {
     this.deleteEmitter.emit(this.entry.id);
   }
   
+  viewDetails(){
+    this.router.navigate([`/detail/${this.entry.id}`]);
+  }
+
   shortenContent(words: string): string {
     return `${words.slice(0, 130)} …`;
   }

@@ -1,9 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import Entry from 'src/app/models/Entry';
 import { ImageService } from 'src/app/services/image.service';
+import { catchError, of, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import ErrorValidationMessages from 'src/app/models/ErrorValidationMessages';
 
 
 @Component({
@@ -17,19 +20,25 @@ export class  NewentryComponent implements OnInit {
   private creationDate: Date;
   public thumbnailContent: string;
 
+  public errorMessages: string[] = [];
+  public hasErrors: boolean = false;
+
+  public showInvalidForm: boolean = false;
+
   constructor(private router: Router, private route: ActivatedRoute, private apiService: ApiService, private imageService: ImageService) {
     this.id = 0;
     this.creationDate = new Date();
     this.thumbnailContent = '';
+    this.errorMessages = [];
   }
 
   public get hasId(): boolean {
     return this.id !=0;
   }
 
-  newEntryForm = new FormGroup({
-    title: new FormControl(''),
-    content: new FormControl(''),
+  public newEntryForm = new FormGroup({
+    title: new FormControl('', [Validators.required, Validators.minLength(10)]),
+    content: new FormControl('', [Validators.required, Validators.minLength(10)]),
     thumbnailUrl: new FormControl('')
   });
 
@@ -66,6 +75,12 @@ export class  NewentryComponent implements OnInit {
   }
 
   onSubmit():void{
+    if (!this.newEntryForm.valid) {
+      this.showInvalidForm = true;
+      this.newEntryForm.markAllAsTouched();
+      return;
+    }
+    this.showInvalidForm = false;
     const formValues = this.newEntryForm.value;
     if(this.id == 0){
       this.apiService
@@ -75,7 +90,19 @@ export class  NewentryComponent implements OnInit {
         thumbnailUrl: formValues.thumbnailUrl || '', 
         thumbnailContent: this.thumbnailContent, 
         creationDate: new Date().toJSON()
-      })
+      }).pipe(
+        catchError((error: HttpErrorResponse) =>{
+          if (error.status === 0) {
+            this.errorMessages = ["An error ocurred"];
+          } else {
+            const errorValidationMessages: ErrorValidationMessages[] = error.error;
+            const resultArray: string[] = errorValidationMessages.map(x => x.errorMessage);
+            this.errorMessages = resultArray;
+            this.hasErrors = (resultArray.length as number) > 0;
+          }
+          return throwError(() => new Error('Something bad happened; please try again later.'))
+        })
+      )
       .subscribe(
         () => {
           this.router.navigate(['/']);
@@ -89,7 +116,19 @@ export class  NewentryComponent implements OnInit {
         thumbnailUrl: formValues.thumbnailUrl || '', 
         thumbnailContent: this.thumbnailContent, 
         creationDate: this.creationDate.toJSON()
-      })
+      }).pipe(
+        catchError((error: HttpErrorResponse) => {
+          if (error.status === 0) {
+            this.errorMessages = ["An error ocurred"];
+          } else {
+            const errorValidationMessages: ErrorValidationMessages[] = error.error;
+            const resultArray: string[] = errorValidationMessages.map(x => x.errorMessage);
+            this.errorMessages = resultArray;
+            this.hasErrors = (resultArray.length as number) > 0;
+          }
+          return throwError(() => new Error('Something bad happened; please try again later.'))
+        })
+      )
       .subscribe(
         () => {
           this.router.navigate(['/']);
@@ -97,5 +136,17 @@ export class  NewentryComponent implements OnInit {
       );
     }
     
+  }
+
+  handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      this.errorMessages = ["An error ocurred"];
+    } else {
+      const errorValidationMessages: ErrorValidationMessages[] = error.error;
+      const resultArray: string[] = errorValidationMessages.map(x => x.errorMessage);
+      this.errorMessages = resultArray;
+      this.hasErrors = (resultArray.length as number) > 0;
+    }
+    return throwError(() => new Error('Something bad happened; please try again later.'))
   }
 }

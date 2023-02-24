@@ -46,10 +46,7 @@ namespace BlogHS.API.Controllers
 
             if (!validation.IsValid)
             {
-                return BadRequest(validation.Errors?.Select(e => new ValidationResult()
-                {
-                    Errors = validation.Errors
-                }));
+                return BadRequest(validation.Errors);
             }
             var entry = await _service.CreateEntryAsync(dto);
             return Ok(entry);

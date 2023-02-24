@@ -9,6 +9,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class EntrycardlistComponent implements OnInit {
   entries : Entry[] = [];
+  loaded: boolean = false;
 
   public get entriesEmpty() : boolean {
     return this.entries.length == 0;
@@ -17,7 +18,10 @@ export class EntrycardlistComponent implements OnInit {
   constructor(private apiService: ApiService){}
 
   ngOnInit(): void {
-    this.apiService.getAll<Entry>('entry').subscribe((entries) => (this.entries = entries));
+    this.apiService.getAll<Entry>('entry').subscribe((entries) => {
+      this.entries = entries;
+      this.loaded = true;
+    });
   }
 
   deleteEntry(id: number) {
