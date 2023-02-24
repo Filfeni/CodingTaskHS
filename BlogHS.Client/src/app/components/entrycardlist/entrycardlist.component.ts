@@ -9,6 +9,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class EntrycardlistComponent implements OnInit {
   entries : Entry[] = [];
+  loading: boolean = false;
   loaded: boolean = false;
 
   public get entriesEmpty() : boolean {
@@ -18,8 +19,10 @@ export class EntrycardlistComponent implements OnInit {
   constructor(private apiService: ApiService){}
 
   ngOnInit(): void {
+    this.loading = true;
     this.apiService.getAll<Entry>('entry').subscribe((entries) => {
       this.entries = entries;
+      this.loading = false;
       this.loaded = true;
     });
   }

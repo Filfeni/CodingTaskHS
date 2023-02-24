@@ -12,6 +12,8 @@ export class EntrydetailsComponent implements OnInit {
   
   private id: number;
   public entry: Entry;
+  public loading: boolean = false;
+  public loaded: boolean = false;
 
   constructor(private router: Router, private route: ActivatedRoute, private apiService: ApiService) {
     this.id = 0;
@@ -28,10 +30,15 @@ export class EntrydetailsComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = params['id'] || 0;
     });
+    this.loading = true;
     this.apiService
       .getOne<Entry>('entry',this.id)
       .subscribe(
-        (entry) => (this.entry = entry)
+        (entry) => {
+          this.entry = entry;
+          this.loaded = true;
+          this.loading = false;
+        }
       );
   }
 
