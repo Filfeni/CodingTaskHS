@@ -5,29 +5,9 @@ VisualStudioVersion = 17.4.33403.182
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogHS.API", "BlogHS.API\BlogHS.API.csproj", "{E76A0E2B-F739-430F-BE40-396E9CE5E414}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "BlogHS.Client", "BlogHS.Client\", "{2E6EF4AE-65D0-4357-BA06-E43A4EB4E019}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_52869"
-		Debug.AspNetCompiler.PhysicalPath = "BlogHS.Client\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_52869\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_52869"
-		Release.AspNetCompiler.PhysicalPath = "BlogHS.Client\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_52869\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "52869"
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogHS.Domain", "BlogHS.Domain\BlogHS.Domain.csproj", "{D7EE6380-CF1F-4A99-AE8D-46429169856D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogHS.Domain", "BlogHS.Domain\BlogHS.Domain.csproj", "{D7EE6380-CF1F-4A99-AE8D-46429169856D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogHS.Infrastructure", "BlogHS.Infrastructure\BlogHS.Infrastructure.csproj", "{7720C87F-3105-40D1-8138-667FE74C1C57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogHS.Infrastructure", "BlogHS.Infrastructure\BlogHS.Infrastructure.csproj", "{7720C87F-3105-40D1-8138-667FE74C1C57}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,10 +19,6 @@ Global
 		{E76A0E2B-F739-430F-BE40-396E9CE5E414}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E76A0E2B-F739-430F-BE40-396E9CE5E414}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E76A0E2B-F739-430F-BE40-396E9CE5E414}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2E6EF4AE-65D0-4357-BA06-E43A4EB4E019}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2E6EF4AE-65D0-4357-BA06-E43A4EB4E019}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2E6EF4AE-65D0-4357-BA06-E43A4EB4E019}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{2E6EF4AE-65D0-4357-BA06-E43A4EB4E019}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{D7EE6380-CF1F-4A99-AE8D-46429169856D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D7EE6380-CF1F-4A99-AE8D-46429169856D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7EE6380-CF1F-4A99-AE8D-46429169856D}.Release|Any CPU.ActiveCfg = Release|Any CPU
